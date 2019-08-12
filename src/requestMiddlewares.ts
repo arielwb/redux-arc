@@ -39,7 +39,7 @@ const get = middlewares => (applyPoint) => {
   };
 };
 
-export function getRequestMiddlewares(middlewares) {
+export const getRequestMiddlewares = (middlewares) => {
   if (!Array.isArray(middlewares)) {
     return get([]);
   }

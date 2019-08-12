@@ -1,27 +1,31 @@
 /* eslint-disable import/first */
+
+
+
+
+
+// eslint-disable-next-line import/first
+import createAsyncMiddleware from '../src/createAsyncMiddleware';
+import * as middlewaresMock from '../src/requestMiddlewares';
+
 jest.mock('../src/requestMiddlewares', () => ({
   globalMiddlewares: {},
   onCallApply: jest.fn((applyPoint) => store => done =>
-  (action, error, response) => done(action, error, response))
+    (action, error, response) => done(action, error, response))
 }));
-const middlewares = require('../src/requestMiddlewares');
 
-const get = policeNames => middlewares.onCallApply;
-middlewares.getRequestMiddlewares = jest.fn((middlewares) => {
+
+const get = policeNames => middlewaresMock.onCallApply;
+middlewaresMock.getRequestMiddlewares = jest.fn((middlewares) => {
   if (Array.isArray(middlewares)) {
     return get(middlewares);
   }
   return get([]);
 });
 
-
-// eslint-disable-next-line import/first
-import createAsyncMiddleware from '../src/createAsyncMiddleware';
-import middlewaresMock from '../src/requestMiddlewares';
-
 const storeApi = {
-  dispatch: jest.fn(() => {}),
-  getState: jest.fn(() => {}),
+  dispatch: jest.fn(() => { }),
+  getState: jest.fn(() => { }),
 };
 
 const API_RESPONSE = 'API_RESPONSE';
@@ -121,8 +125,8 @@ describe('createAsyncMiddleware', () => {
 
   it('should call asyncTask with the store', () => {
     const asyncTaskMock = jest.fn();
-    asyncTaskMock.mockReturnValue(() => () => {});
-    const apiMiddleware = createAsyncMiddleware(asyncTaskMock)(storeApi)(() => {});
+    asyncTaskMock.mockReturnValue(() => () => { });
+    const apiMiddleware = createAsyncMiddleware(asyncTaskMock)(storeApi)(() => { });
     apiMiddleware({
       type: ['REQUEST_ACTION', 'RESPONSE_ACTION'],
       meta: {},

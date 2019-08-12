@@ -4,8 +4,8 @@ const expectedToThrow = `All keys must be valid types and all values should be f
 {
   a: 👉 'test',
   👉 undefined: function Test(state, action) { ... },
-  b: function b() { ... },
-  c: function c() { ... },
+  b: () => { ... },
+  c: function () { ... },
   d: 👉 null,
   👉 [object Object]: 👉 null,
   e: 👉 1,
