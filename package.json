@@ -16,6 +16,7 @@
     "async"
   ],
   "scripts": {
+    "tsc": "tsc --noEmit",
     "clean": "rimraf lib dist es coverage",
     "lint": "eslint src test build",
     "test": "cross-env BABEL_ENV=commonjs jest",
@@ -37,6 +38,8 @@
     "docs:publish": "npm run docs:clean && npm run docs:build && cp CNAME _book && cd _book && git init && git commit --allow-empty -m 'update book' && git checkout -b gh-pages && touch .nojekyll && git add . && git commit -am 'update book' && git push git@github.com:viniciusdacal/redux-arc gh-pages --force"
   },
   "devDependencies": {
+    "@types/jest": "^24.0.17",
+    "@types/node": "^12.7.1",
     "babel-cli": "6.26.0",
     "babel-core": "6.26.0",
     "babel-eslint": "8.2.2",
@@ -54,7 +57,7 @@
     "eslint-plugin-react": "7.4.0",
     "gitbook-cli": "2.3.2",
     "glob": "7.1.1",
-    "jest": "22.4.2",
+    "jest": "^24.8.0",
     "prettier": "1.8.2",
     "redux": "3.7.1",
     "rimraf": "2.6.2",
@@ -62,24 +65,16 @@
     "rollup-plugin-babel": "3.0.2",
     "rollup-plugin-node-resolve": "3.0.0",
     "rollup-plugin-replace": "2.0.0",
-    "rollup-plugin-uglify": "2.0.1"
+    "rollup-plugin-uglify": "2.0.1",
+    "ts-jest": "^24.0.2"
   },
   "authors": [
     "Vinicius Dacal <viniciusldacal@gmail.com> (https://github.com/viniciusdacal)"
   ],
   "license": "MIT",
-  "jest": {
-    "coverageDirectory": "./coverage",
-    "testRegex": "(/test/.*\\.spec.js)$",
-    "globals": {
-      "BABEL_ENV": "commonjs"
-    },
-    "modulePathIgnorePatterns": [
-      "<rootDir>/_book/"
-    ],
-    "testURL": "http://localhost"
+  "dependencies": {
+    "typescript": "^3.5.3"
   },
-  "dependencies": {},
   "peerDependencies": {
     "redux": ">= 3.7.1"
   }
