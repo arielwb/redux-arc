@@ -1,9 +1,16 @@
-export default function parseUrl(url, params) {
-  return url.replace(/(:)([A-Za-z][A-Za-z0-9]*)/g, (match, $1, $2) => {
-    const paramType  = typeof params[$2];
+export interface MetaParameters {
+  [key: string]: number | string
+}
+
+export default function parseUrl(url: string, params: MetaParameters) {
+  const replaceUrlParameters = (match: string, $1: string, param: string): string => {
+    const paramType = typeof params[param]
+
     if (paramType !== 'string' && paramType !== 'number') {
-      throw new Error(`Param ${$2} from url ${url}, not found in params object`);
+      throw new Error(`Param ${param} from url ${url}, not found in params object`);
     }
-    return params[$2];
-  });
+    return `${params[param]}`
+  }
+
+  return url.replace(/(:)([A-Za-z][A-Za-z0-9]*)/g, replaceUrlParameters)
 }
